@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>宝の地図 大量出現 鑑定ツール</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="sheet.css" />
+  <script src="main.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="title">宝の地図 大量出現 鑑定ツール</div>
+      <div class="description">ドラクエウォーク宝の地図 出現モンスターの中に大量発生するモンスターが存在するか鑑定します。</div>
+    </header>
+    <main>
+      <br>
+      <div class="div_reset">
+        <input type="button" class="button" onclick="reset()" value="リセット">
+      </div>
+      <br>
+      <div class="div_mapname">
+        <input type="text" size="26" id="input_mapname" class="input_mapname" placeholder="地図名を入力（省略可）">
+      </div>
+      <br>
+      <div class="div_input">
+        <div id="display_input" class="display_input"></div>
+        <div class="space_input"></div>
+        <textarea id="textarea_input" class="textarea_input" placeholder="図鑑No. or 名前を入力"
+          oninput="input(this)"></textarea>
+      </div>
+      <br>
+      <div class="div_enter">
+        <input type="button" class="button" onclick="result()" value="地図を鑑定">
+      </div>
+      <div id="scroll"></div>
+      <br>
+      <div class="div_table">
+        <div id="table_result" class="table_result"></div>
+      </div>
+      <br>
+      <div class="div_score">
+        <div id="container_score" class="container_score"></div>
+      </div>
+      <br>
+      <br>
+      <br>
+    </main>
+    <footer>
+      <div class="description">操作説明</div>
+      <ol>
+        <li>宝の地図出現モンスター計１２匹の図鑑ナンバーを入力しましょう。（モンスター名をひらがな入力でもＯＫ！）</li>
+        <li>地図名は入力しなくてもいいですが、入力すると鑑定結果の上に一緒に表示されます。</li>
+        <li>
+          最後に「地図を鑑定」ボタンを押しましょう。<br>
+          鑑定結果が表と一緒に表示されます。スクショして保存したり、地図紹介の時にスクショを一緒に載せるのもいいかもしれません。
+        </li>
+      </ol>
+      <br>
+      <div class="description">
+        <span id="menu" class="menu">鑑定の詳細 ▼</span>
+      </div>
+      <div id="menu_description" class="menu_description">
+        <br>
+        以下、鑑定方法の詳細です。<br>
+        ・とても～よく枠に等倍が1匹だけいる<br>
+        ・とても～ときどき枠に等倍が1匹だけいる<br>
+        <br>
+        上記のいずれかの時で、<br>
+        ・とても枠に1.2倍がいない --- 【判定】大量発生<br>
+        ・とても枠に1.2倍が1匹だけいる --- 【判定】大量発生（クランベリー型）<br>
+        ・とても枠に1.2倍が2匹以上いる --- 【判定】大量発生 ただし4匹構成少ない<br>
+        <br>
+        と判定されます。<br>
+        上記以外で、<br>
+        ・あまり～メタル枠に等倍が1匹だけいる --- 【判定】要検証<br>
+        ・等倍がいないorあまり～メタル枠に2匹以上 --- 【判定】4匹構成少ない<br>
+        <br>
+        と判定されます。<br>
+        どれにも当てはまらないときは、特徴なしとなります。<br>
+        入力に間違いがあるときは、鑑定不可となります。<br>
+        <br>
+        以上<br>
+      </div>
+      <br>
+      <div class="description">参考元</div>
+      <ul>
+        <li><a href="https://twitter.com/Lv20_HP140MP80/status/1709521858377466185">すずしろ店長 様</a></li>
+      </ul>
+      <br>
+      <div class="description">ツール製作者</div>
+      <ul>
+        <li><a href="https://twitter.com/R_tsumland">あーる@ドラクエウォーク</a></li>
+      </ul>
+    </footer>
+  </div>
+</body>
+
+</html>
