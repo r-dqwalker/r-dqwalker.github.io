@@ -212,17 +212,21 @@ function check(result) {
       score[0] = 1
     }
     if (size[0].length === 1) {
-      if (size[4].length === 0) {
-        score[0] = 2
-        score[1] = size[0]
-      }
-      if (size[4].length === 1) {
-        score[0] = 3
-        score[1] = size[0]
-      }
-      if (size[4].length > 1) {
-        score[0] = 4
-        score[1] = size[0]
+      if (size[1].length === 0) {
+        if (size[4].length === 0) {
+          score[0] = 2
+          score[1] = size[0]
+        }
+        if (size[4].length === 1) {
+          score[0] = 3
+          score[1] = size[0]
+        }
+        if (size[4].length > 1) {
+          score[0] = 4
+          score[1] = size[0]
+        }
+      } else {
+        score[0] = 1
       }
     }
     if (size[0].length === 0) {
