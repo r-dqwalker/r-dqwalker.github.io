@@ -114,7 +114,7 @@ textarea {
 .textarea_input {
   width: 45%;
   overflow: hidden;
-  white-space: nowrap;
+  white-space: pre;
   overflow-x: hidden;
   font-size: var(--fontsize1);
   line-height: var(--lineheight);
