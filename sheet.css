@@ -15,6 +15,7 @@
   --fontsize1: 12px;
   --fontsize2: 14px;
   --fontsize3: 20px;
+  --fontsize4: 8px;
 
   --maxwidth: 480px;
 
@@ -177,6 +178,11 @@ footer {
 .menu {
   font-size: var(--fontsize1);
   cursor: pointer;
+}
+
+.hint {
+  font-size: var(--fontsize4);
+  margin-left: 5px;
 }
 
 .menu_description {

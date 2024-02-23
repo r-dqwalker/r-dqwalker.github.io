@@ -5,8 +5,7 @@ csv.send();
 let csvArray = []
 let inputArray = []
 const rareArray = ['とても', 'よく', 'ときどき', 'あまり', 'めったに', 'メタル']
-const etcArray = ['', 'イベント']
-const tableArray1 = ['名前', 'サイズ', '頻度', 'その他']
+const tableArray1 = ['名前', 'サイズ', '頻度', '系統']
 const tableArray2 = ['name', 'size', 'rareName', 'etcName']
 const colorArray = ['#d6ffd6', '#d6ffff', '#d6d6ff', '#ffd6ff', '#ffd6d6', '#cccccc']
 let open = 0
@@ -126,16 +125,18 @@ function result() {
       size: csvArray[array][3],
       rare: parseInt(csvArray[array][4]),
       rareName: rareArray[csvArray[array][4] - 1],
-      etcName: etcArray[csvArray[array][5]]
+      etcName: csvArray[array][5]
     });
   }
   resultArray.sort((a, b) => a.rare - b.rare);
 
   const score = check(resultArray);
   const text = label(score[0])
-  let mob = ''
+  let mob = []
   if (score[1] !== -1) {
-    mob = score[1][0].name
+    for (const array of score[1]) {
+      mob.push(array.name);
+    }
   }
 
   const container = document.getElementById('table_result');
@@ -157,9 +158,11 @@ function result() {
       newRow.style.backgroundColor = colorArray[i.rare - 1];
       for (const p of tableArray2) {
         let cell = newRow.insertCell();
-        if (i[p] === mob) {
-          cell.style.color = '#ff0000'
-          cell.style.fontWeight = 'bold'
+        for (const array of mob) {
+          if (i[p] === array) {
+            cell.style.color = '#ff0000'
+            cell.style.fontWeight = 'bold'
+          }
         }
         cell.innerHTML = i[p]
       }
@@ -178,16 +181,27 @@ function result() {
   div1.style.textDecoration = "underline"
   div1.innerHTML = document.getElementById('input_mapname').value
 
-  const div2 = document.createElement('div');
-  const div2text = document.createElement('div');
-  const div2mob = document.createElement('span');
-  div2mob.textContent = mob
-  div2mob.style.color = '#ff0000'
-  div2mob.style.fontWeight = 'bold'
-  div2text.appendChild(div2mob);
-  div2text.appendChild(document.createTextNode(text));
-  div2.appendChild(div2text);
-  container_score.appendChild(div2);
+  const div_score = document.createElement('div');
+  const span_score = document.createElement('span');
+  for (const array of mob) {
+    const span_temp_score = document.createElement('span');
+    span_temp_score.style.color = '#ff0000'
+    span_temp_score.style.fontWeight = 'bold'
+    span_temp_score.textContent = array
+    span_score.appendChild(span_temp_score);
+    span_score.appendChild(document.createElement('span')).textContent = `、`;
+  }
+  if (span_score.hasChildNodes()) {
+    span_score.removeChild(span_score.lastChild);
+  }
+  for (const array of text) {
+    if (array === `mob`) {
+      div_score.appendChild(span_score);
+    } else {
+      div_score.appendChild(document.createTextNode(array));
+    }
+  }
+  container_score.appendChild(div_score);
 
   document.getElementById('scroll').scrollIntoView({ behavior: "smooth", block: "start" });
 }
@@ -203,8 +217,7 @@ function check(result) {
     result.filter(e => e.rare === 1).filter(e => e.size === '1.0倍'),
     result.filter(e => e.rare === 2).filter(e => e.size === '1.0倍'),
     result.filter(e => e.rare === 3).filter(e => e.size === '1.0倍'),
-    result.filter(e => e.rare >= 4).filter(e => e.size === '1.0倍'),
-    result.filter(e => e.rare === 1).filter(e => e.size === '1.2倍')
+    result.filter(e => e.rare >= 4).filter(e => e.size === '1.0倍')
   ]
 
   if (JSON.stringify(lengthTest) === JSON.stringify(length) && result.filter((e, i, arr) => { return arr.findIndex(({ name }) => name === e.name) !== i }).length === 0) {
@@ -213,69 +226,32 @@ function check(result) {
     }
     if (size[0].length === 1) {
       if (size[1].length === 0) {
-        if (size[4].length === 0) {
-          score[0] = 2
-          score[1] = size[0]
-        }
-        if (size[4].length === 1) {
-          score[0] = 3
-          score[1] = size[0]
-        }
-        if (size[4].length > 1) {
-          score[0] = 4
-          score[1] = size[0]
-        }
+        score[0] = 2
+        score[1] = size[0]
       } else {
         score[0] = 1
       }
     }
     if (size[0].length === 0) {
       if (size[1].length > 1) {
-        score[0] = 1
+        score[0] = 2
+        score[1] = size[1]
       }
       if (size[1].length === 1) {
-        if (size[4].length === 0) {
-          score[0] = 2
-          score[1] = size[1]
-        }
-        if (size[4].length === 1) {
-          score[0] = 3
-          score[1] = size[1]
-        }
-        if (size[4].length > 1) {
-          score[0] = 4
-          score[1] = size[1]
-        }
+        score[0] = 2
+        score[1] = size[1]
       }
       if (size[1].length === 0) {
         if (size[2].length > 1) {
-          score[0] = 1
+          score[0] = 2
+          score[1] = size[2]
         }
         if (size[2].length === 1) {
-          if (size[4].length === 0) {
-            score[0] = 2
-            score[1] = size[2]
-          }
-          if (size[4].length === 1) {
-            score[0] = 3
-            score[1] = size[2]
-          }
-          if (size[4].length > 1) {
-            score[0] = 4
-            score[1] = size[2]
-          }
+          score[0] = 2
+          score[1] = size[2]
         }
         if (size[2].length === 0) {
-          if (size[3].length > 1) {
-            score[0] = 6
-          }
-          if (size[3].length === 1) {
-            score[0] = 5
-            score[1] = size[3]
-          }
-          if (size[3].length === 0) {
-            score[0] = 6
-          }
+          score[0] = 3
         }
       }
     }
@@ -287,13 +263,10 @@ function check(result) {
 
 function label(result) {
   const scoreArray = [
-    `鑑定不可。入力を確認してください`,
-    `大量発生の特徴はありません`,
-    `が大量発生`,
-    `が大量発生（クランベリー型）`,
-    `が大量発生。ただし４匹編成が減少傾向`,
-    `のみ等倍。大量発生するかは要検証。基本的には４匹編成が出現しにくく、レベリング不向きな構成です`,
-    `４匹編成が出現しにくく、レベリング不向きな構成です`
+    [`鑑定不可。入力を確認してください`],
+    [`大量発生の特徴はありません`],
+    [`mob`, `が大量発生`],
+    [`４匹編成減少パターン（とても～ときどき枠に等倍がいない）`]
   ]
   return scoreArray[result]
 }
