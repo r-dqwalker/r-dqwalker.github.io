@@ -7,6 +7,7 @@
   --color3: #F2DEBA;
   --color4: #FFEFD6;
   --color5: #ffffff;
+  --color6: #ffd700;
 
   --padding1: 14px;
 
@@ -65,6 +66,10 @@ header {
 
 .description {
   font-size: var(--fontsize1);
+}
+
+.caution {
+  color: var(--color6);
 }
 
 main {
