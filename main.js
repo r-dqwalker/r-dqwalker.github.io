@@ -1,5 +1,5 @@
 let csv = new XMLHttpRequest();
-csv.open("GET", "data.csv", true);
+csv.open("GET", "data.csv?20240414", true);
 csv.send();
 
 let csvArray = []
