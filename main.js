@@ -44,12 +44,21 @@ window.onload = function () {
       }
     }
   });
-  document.getElementById('menu').addEventListener('click', function () {
+  document.getElementById('menu1').addEventListener('click', function () {
     if (open === 0) {
-      document.getElementById('menu_description').style.display = 'block';
+      document.getElementById('menu_open1').style.display = 'block';
       open++;
     } else {
-      document.getElementById('menu_description').style.display = 'none';
+      document.getElementById('menu_open1').style.display = 'none';
+      open = 0
+    }
+  });
+  document.getElementById('menu2').addEventListener('click', function () {
+    if (open === 0) {
+      document.getElementById('menu_open2').style.display = 'block';
+      open++;
+    } else {
+      document.getElementById('menu_open2').style.display = 'none';
       open = 0
     }
   });
