@@ -1,5 +1,5 @@
 let csv = new XMLHttpRequest();
-csv.open("GET", "data.csv?20240414", true);
+csv.open("GET", "data.csv?20241017", true);
 csv.send();
 
 let csvArray = []
@@ -8,7 +8,7 @@ const rareArray = ['とても', 'よく', 'ときどき', 'あまり', 'めっ�
 const tableArray1 = ['名前', 'サイズ', '頻度', '系統']
 const tableArray2 = ['name', 'size', 'rareName', 'etcName']
 const colorArray = ['#d6ffd6', '#d6ffff', '#d6d6ff', '#ffd6ff', '#ffd6d6', '#cccccc']
-let open = 0
+let open = [ 0, 0 ]
 
 csv.onload = function () {
   if (csv.status === 200) {
@@ -45,21 +45,21 @@ window.onload = function () {
     }
   });
   document.getElementById('menu1').addEventListener('click', function () {
-    if (open === 0) {
+    if (open[0] === 0) {
       document.getElementById('menu_open1').style.display = 'block';
-      open++;
+      open[0]++;
     } else {
       document.getElementById('menu_open1').style.display = 'none';
-      open = 0
+      open[0] = 0
     }
   });
   document.getElementById('menu2').addEventListener('click', function () {
-    if (open === 0) {
+    if (open[1] === 0) {
       document.getElementById('menu_open2').style.display = 'block';
-      open++;
+      open[1]++;
     } else {
       document.getElementById('menu_open2').style.display = 'none';
-      open = 0
+      open[1] = 0
     }
   });
 }
