@@ -1,5 +1,5 @@
 let csv = new XMLHttpRequest();
-csv.open("GET", "data.csv?20250114", true);
+csv.open("GET", "data.csv?20250418", true);
 csv.send();
 
 let csvArray = []
@@ -168,7 +168,7 @@ function result() {
       for (const p of tableArray2) {
         let cell = newRow.insertCell();
         for (const array of mob) {
-          if (i[p] === array) {
+          if (i[p] === array && tableArray2.indexOf(p) === 0) {
             cell.style.color = '#ff0000'
             cell.style.fontWeight = 'bold'
           }
